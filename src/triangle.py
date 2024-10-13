@@ -1,4 +1,4 @@
-from ctypes import sizeof
+import ctypes
 from pathlib import Path
 import sys
 
@@ -138,8 +138,8 @@ def main() -> None:
     glBindVertexArray(vao)
     glEnableVertexAttribArray(0)
     glEnableVertexAttribArray(1)
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, GLvoidp(0))
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, GLvoidp(sizeof(GLfloat) * 2))
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, ctypes.sizeof(GLfloat) * 5, GLvoidp(0))
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, ctypes.sizeof(GLfloat) * 5, GLvoidp(ctypes.sizeof(GLfloat) * 2))
     glBindVertexArray(0)
 
     glClearColor(0, 0, 0, 1)
