@@ -44,6 +44,7 @@ class Shader:
 
         gl.glAttachShader(self.handle, shader)
         gl.glDeleteShader(shader)
+
         return True
 
     def link(self):
