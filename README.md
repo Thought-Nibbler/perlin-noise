@@ -36,6 +36,13 @@ PowerShell を再起動して以下のコマンドを実行する。
 PowerShell を再起動して以下のコマンドを実行する。
 
 ```
+poetry env use "$env:HOMEDRIVE$env:HOMEPATH\.pyenv\pyenv-win\versions\3.10.5\python.exe"
+poetry env info
+```
+
+※コマンドプロンプトの場合
+
+```
 poetry env use "%HOMEPATH%\.pyenv\pyenv-win\versions\3.10.5\python.exe"
 poetry env info
 ```
