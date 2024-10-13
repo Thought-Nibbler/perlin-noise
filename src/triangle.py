@@ -4,6 +4,7 @@ import sys
 import numpy as np
 
 from OpenGL.GL import *
+import OpenGL.GL as gl
 import glfw
 
 class Shader:
@@ -93,7 +94,7 @@ def main():
     ], dtype=GLfloat)
 
     # GPU上にバッファを生成
-    vbo = glGenBuffers(1)
+    vbo = gl.glGenBuffers(1)  # 頂点バッファオブジェクト（vbo）を 1 つ生成する
     glBindBuffer(GL_ARRAY_BUFFER, vbo)
     glBufferData(GL_ARRAY_BUFFER, data.itemsize * data.size, (GLfloat * data.size)(*data), GL_STATIC_DRAW)
 
