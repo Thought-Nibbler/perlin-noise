@@ -29,6 +29,7 @@ PowerShell を再起動して以下のコマンドを実行する。
 
 ```
 (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+[System.Environment]::SetEnvironmentVariable('path', $env:APPDATA + "\Python\Scripts;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
 ```
 
 `%APPDATA%\Python\Scripts` にパスを通す。
@@ -36,13 +37,17 @@ PowerShell を再起動して以下のコマンドを実行する。
 PowerShell を再起動して以下のコマンドを実行する。
 
 ```
+poetry config virtualenvs.in-project true
 poetry env use "$env:HOMEDRIVE$env:HOMEPATH\.pyenv\pyenv-win\versions\3.10.5\python.exe"
 poetry env info
+poetry install
 ```
 
 ※コマンドプロンプトの場合
 
 ```
+poetry config virtualenvs.in-project true
 poetry env use "%HOMEPATH%\.pyenv\pyenv-win\versions\3.10.5\python.exe"
 poetry env info
+poetry install
 ```
