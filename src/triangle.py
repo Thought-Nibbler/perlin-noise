@@ -1,4 +1,5 @@
 from ctypes import sizeof
+from pathlib import Path
 import sys
 
 import numpy as np
@@ -11,7 +12,10 @@ class Shader:
     def __init__(self):
         self.handle = glCreateProgram()
 
-    def attach_shader(self, content, type):
+    def attach_shader(self, shader_file, type):
+        with shader_file.open() as f:
+            content = f.read()
+
         shader = glCreateShader(type)
         glShaderSource(shader, [content])
         glCompileShader(shader)
@@ -94,8 +98,8 @@ def main() -> None:
 
     # シェーダの生成
     program = Shader()
-    program.attach_shader(vert, GL_VERTEX_SHADER)
-    program.attach_shader(frag, GL_FRAGMENT_SHADER)
+    program.attach_shader(Path('./src/vertex.glsl'), gl.GL_VERTEX_SHADER)
+    program.attach_shader(Path('./src/fragment.glsl'), gl.GL_FRAGMENT_SHADER)
     program.link()
 
     points = np.array([[0, 1],
