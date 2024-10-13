@@ -98,11 +98,16 @@ def main() -> None:
     program.attach_shader(frag, GL_FRAGMENT_SHADER)
     program.link()
 
-    data = np.array([
-        0, 1,  1, 0, 0, # 頂点(0, 1)，  色(1, 0, 0)
-        1, -1,  0, 1, 0,# 頂点(1, -1)， 色(0, 1, 0)
-        -1, -1, 0, 0, 1 # 頂点(-1, -1)，色(0, 0, 1)
-    ], dtype=GLfloat)
+    points = np.array([[0, 1],
+                       [1, -1],
+                       [-1, -1]])
+    colors = np.array([[1, 0, 0],
+                       [0, 1, 0],
+                       [0, 0, 1]])
+    data = np.array([*points[0], *colors[0],
+                     *points[1], *colors[1],
+                     *points[2], *colors[2]],
+                    dtype=gl.GLfloat)
 
     # GPU上にバッファを生成
     vbo = gl.glGenBuffers(1)  # 頂点バッファオブジェクト（vbo）を 1 つ生成する
