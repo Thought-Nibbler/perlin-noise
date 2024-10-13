@@ -68,7 +68,18 @@ void main() {
 }
 """
 
-def main():
+
+def main() -> None:
+    """
+    _summary_
+
+    Raises
+    ------
+    RuntimeError
+        _description_
+    RuntimeError
+        _description_
+    """
     if not glfw.init():
         raise RuntimeError("failed to initialize GLFW")
 
