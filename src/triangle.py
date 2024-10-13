@@ -31,19 +31,19 @@ class Shader:
         with shader_file.open() as f:
             content = f.read()
 
-        shader = glCreateShader(type)
-        glShaderSource(shader, [content])
-        glCompileShader(shader)
+        shader = gl.glCreateShader(type)
+        gl.glShaderSource(shader, [content])
+        gl.glCompileShader(shader)
 
-        status = ctypes.c_uint(GL_UNSIGNED_INT)
-        glGetShaderiv(shader, GL_COMPILE_STATUS, status)
+        status = ctypes.c_uint(gl.GL_UNSIGNED_INT)
+        gl.glGetShaderiv(shader, gl.GL_COMPILE_STATUS, status)
         if not status:
-            print(glGetShaderInfoLog(shader).decode("utf-8"), file=sys.stderr)
-            glDeleteShader(shader)
+            print(gl.glGetShaderInfoLog(shader).decode("utf-8"), file=sys.stderr)
+            gl.glDeleteShader(shader)
             return False
 
-        glAttachShader(self.handle, shader)
-        glDeleteShader(shader)
+        gl.glAttachShader(self.handle, shader)
+        gl.glDeleteShader(shader)
         return True
 
     def link(self):
