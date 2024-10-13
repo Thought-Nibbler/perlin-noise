@@ -12,7 +12,22 @@ class Shader:
     def __init__(self):
         self.handle = glCreateProgram()
 
-    def attach_shader(self, shader_file, type):
+    def attach_shader(self, shader_file: Path, type: gl.constant.IntConstant) -> bool:
+        """
+        _summary_
+
+        Parameters
+        ----------
+        shader_file : Path
+            _description_
+        type : gl.constant.IntConstant
+            _description_
+
+        Returns
+        -------
+        bool
+            _description_
+        """
         with shader_file.open() as f:
             content = f.read()
 
