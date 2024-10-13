@@ -1,9 +1,4 @@
-"""
-OpenGL で三角形描画するスクリプト
-
-以下 URL をベースとしている
-https://qiita.com/asuka1975/items/02c253fdb2a607165e14
-"""
+"""OpenGL で三角形描画するスクリプト"""
 import ctypes
 from pathlib import Path
 import sys
