@@ -1,0 +1,35 @@
+[tool.taskipy.tasks]
+run = "python src/triangle.py"
+lint = "mypy src & flake8 --config %HOMEPATH%/.flake8 src tests & pylint --rcfile %HOMEPATH%/.pylintrc src tests"
+test = "pytest"
+
+[tool.poetry]
+name = "perlin-noise"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "perlin_noise", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+opencv-python = "^4.10.0.84"
+numpy = "^2.1.2"
+pyopengl = "^3.1.7"
+glfw = "^2.7.0"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+flake8-docstrings = "^1.7.0"
+mypy = "^1.11.2"
+pylint = "^3.3.1"
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+pytest-datadir = "^1.5.0"
+sphinx = "^8.1.2"
+sphinx-rtd-theme = "^3.0.1"
+taskipy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
