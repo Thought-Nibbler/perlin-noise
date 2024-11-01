@@ -1,6 +1,6 @@
 [tool.taskipy.tasks]
 run = "python src/triangle.py"
-lint = "mypy src & flake8 --config %HOMEPATH%/.flake8 src tests & pylint --rcfile %HOMEPATH%/.pylintrc src tests"
+lint = "mypy src & flake8 src tests & pylint src tests"
 test = "pytest"
 
 [tool.poetry]
