@@ -7,7 +7,7 @@ test = "pytest"
 name = "perlin-noise"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Thought-Nibbler <Thought-Nibbler@example.com>"]
 readme = "README.md"
 packages = [{include = "perlin_noise", from = "src"}]
 
