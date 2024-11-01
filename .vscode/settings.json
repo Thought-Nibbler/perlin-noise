@@ -1,0 +1,15 @@
+{
+    "flake8.args": [
+        "--config",
+        ".flake8"
+    ],
+    "mypy-type-checker.args": [
+        "--config-file",
+        "mypy.ini",
+        "src"
+    ],
+    "pylint.args": [
+        "--rcfile",
+        ".pylintrc"
+    ]
+}
