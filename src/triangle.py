@@ -68,6 +68,70 @@ class Shader:
             return False
         return True
 
+    def create_vbo(self, data: np.ndarray) -> np.uintc:
+        """
+        VBO (Vertex Buffer Object) を生成する。
+
+        参考 : `頂点バッファの基礎 <https://wgld.org/d/webgl/w009.html>`_
+
+        Parameters
+        ----------
+        data : np.ndarray
+            _description_
+
+        Returns
+        -------
+        np.uintc
+            生成した VBO (Vertex Buffer Object) 。
+        """
+        vbo = gl.glGenBuffers(1)
+
+        gl.glBindBuffer(gl.GL_ARRAY_BUFFER, vbo)
+        size = data.itemsize * data.size
+        data_ptr = (gl.GLfloat * data.size)(*data)
+        gl.glBufferData(gl.GL_ARRAY_BUFFER, size, data_ptr, gl.GL_STATIC_DRAW)
+
+        return vbo
+
+    def create_vao(self) -> np.uintc:
+        """
+        VAO (Vertex Array Object) を生成する。
+
+        参考 : `VAO(vertex array object) <https://wgld.org/d/webgl/w073.html>`_
+
+        Returns
+        -------
+        np.uintc
+            生成した VAO (Vertex Array Object) 。
+        """
+        vao = gl.glGenVertexArrays(1)
+
+        gl.glBindVertexArray(vao)
+
+        # VBO の頂点座標部分の設定
+        idx = 0
+        size = 2  # 2 次元座標
+        data_type = gl.GL_FLOAT
+        normalized = gl.GL_FALSE  # 正規化しない
+        stride = ctypes.sizeof(gl.GLfloat) * 5  # 1 頂点あたり 5 要素ある
+        pointer = gl.GLvoidp(0)  # 頂点座標は VBO の先頭から始まる
+        gl.glEnableVertexAttribArray(idx)
+        gl.glVertexAttribPointer(idx, size, data_type, normalized, stride, pointer)
+
+        # VBO の色情報部分の設定
+        idx = 1
+        size = 3  # RGB 値
+        data_type = gl.GL_FLOAT
+        normalized = gl.GL_FALSE  # 正規化しない
+        stride = ctypes.sizeof(gl.GLfloat) * 5  # 1 頂点あたり 5 要素ある
+        pointer = gl.GLvoidp(ctypes.sizeof(gl.GLfloat) * 2)  # 色情報は VBO の 3 番目から始まる
+        gl.glEnableVertexAttribArray(idx)
+        gl.glVertexAttribPointer(idx, size, data_type, normalized, stride, pointer)
+
+        gl.glBindVertexArray(0)  # 一旦 VAO の結合を解除する NOTE: 必要なのか？
+
+        return vao
+
     def use(self) -> None:
         """_summary_"""
         gl.glUseProgram(self.handle)
@@ -117,19 +181,8 @@ def main() -> None:
                      *points[2], *colors[2]],
                     dtype=gl.GLfloat)
 
-    # GPU上にバッファを生成
-    vbo = gl.glGenBuffers(1)  # 頂点バッファオブジェクト（vbo）を 1 つ生成する
-    glBindBuffer(GL_ARRAY_BUFFER, vbo)
-    glBufferData(GL_ARRAY_BUFFER, data.itemsize * data.size, (GLfloat * data.size)(*data), GL_STATIC_DRAW)
-
-    # バッファのデータとシェーダの変数を関連付け
-    vao = glGenVertexArrays(1)
-    glBindVertexArray(vao)
-    glEnableVertexAttribArray(0)
-    glEnableVertexAttribArray(1)
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, ctypes.sizeof(GLfloat) * 5, GLvoidp(0))
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, ctypes.sizeof(GLfloat) * 5, GLvoidp(ctypes.sizeof(GLfloat) * 2))
-    glBindVertexArray(0)
+    vbo = program.create_vbo(data)
+    vao = program.create_vao()
 
     glClearColor(0, 0, 0, 1)
     while glfw.window_should_close(window) == glfw.FALSE:
