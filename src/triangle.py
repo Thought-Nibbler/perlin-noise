@@ -14,7 +14,7 @@ class Shader:
     """_summary_"""
 
     def __init__(self) -> None:
-        self.handle = glCreateProgram()
+        self.handle = gl.glCreateProgram()
 
     def attach_shader(self, shader_file: Path, type: gl.constant.IntConstant) -> bool:
         """
@@ -70,11 +70,11 @@ class Shader:
 
     def use(self) -> None:
         """_summary_"""
-        glUseProgram(self.handle)
+        gl.glUseProgram(self.handle)
 
     def unuse(self) -> None:
         """_summary_"""
-        glUseProgram(0)
+        gl.glUseProgram(0)
 
 
 def main() -> None:
