@@ -48,7 +48,7 @@ class Shader:
 
         return True
 
-    def link(self):
+    def link(self) -> bool:
         gl.glLinkProgram(self.handle)
         status = ctypes.c_uint(gl.GL_UNSIGNED_INT)
         gl.glGetProgramiv(self.handle, gl.GL_LINK_STATUS, status)
