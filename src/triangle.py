@@ -15,7 +15,7 @@ class Shader:
     def __init__(self) -> None:
         self.handle = gl.glCreateProgram()
 
-    def attach_shader(self, shader_file: Path, type: gl.constant.IntConstant) -> bool:
+    def attach_shader(self, shader_file: Path, shader_type: gl.constant.IntConstant) -> bool:
         """
         _summary_
 
@@ -23,7 +23,7 @@ class Shader:
         ----------
         shader_file : Path
             _description_
-        type : gl.constant.IntConstant
+        shader_type : gl.constant.IntConstant
             _description_
 
         Returns
@@ -34,7 +34,7 @@ class Shader:
         with shader_file.open() as f:
             content = f.read()
 
-        shader = gl.glCreateShader(type)
+        shader = gl.glCreateShader(shader_type)
         gl.glShaderSource(shader, [content])
         gl.glCompileShader(shader)
 
