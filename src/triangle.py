@@ -9,7 +9,10 @@ from OpenGL.GL import *
 import OpenGL.GL as gl
 import glfw
 
+
 class Shader:
+    """_summary_"""
+
     def __init__(self) -> None:
         self.handle = glCreateProgram()
 
@@ -49,6 +52,14 @@ class Shader:
         return True
 
     def link(self) -> bool:
+        """
+        _summary_
+
+        Returns
+        -------
+        bool
+            _description_
+        """
         gl.glLinkProgram(self.handle)
         status = ctypes.c_uint(gl.GL_UNSIGNED_INT)
         gl.glGetProgramiv(self.handle, gl.GL_LINK_STATUS, status)
@@ -58,9 +69,11 @@ class Shader:
         return True
 
     def use(self) -> None:
+        """_summary_"""
         glUseProgram(self.handle)
 
     def unuse(self) -> None:
+        """_summary_"""
         glUseProgram(0)
 
 
