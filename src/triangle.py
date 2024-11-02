@@ -5,7 +5,6 @@ import sys
 
 import numpy as np
 
-from OpenGL.GL import *
 import OpenGL.GL as gl
 import glfw
 
@@ -184,22 +183,24 @@ def main() -> None:
     vbo = program.create_vbo(data)
     vao = program.create_vao()
 
-    glClearColor(0, 0, 0, 1)
+    gl.glClearColor(0, 0, 0, 1)
+
     while glfw.window_should_close(window) == glfw.FALSE:
-        glClear(GL_COLOR_BUFFER_BIT)
+        gl.glClear(gl.GL_COLOR_BUFFER_BIT)
 
         # 描画
         program.use()
-        glBindVertexArray(vao)
-        glDrawArrays(GL_TRIANGLES, 0, 3)
-        glBindVertexArray(0)
+        gl.glBindVertexArray(vao)
+        gl.glDrawArrays(gl.GL_TRIANGLES, 0, 3)
+        gl.glBindVertexArray(0)
         program.unuse()
 
         glfw.swap_buffers(window)
         glfw.wait_events()
-    glDeleteVertexArrays(1, [vao])
-    glDeleteBuffers(1, [vbo])
-    glDeleteProgram(program.handle)
+
+    gl.glDeleteVertexArrays(1, [vao])
+    gl.glDeleteBuffers(1, [vbo])
+    gl.glDeleteProgram(program.handle)
 
     glfw.terminate()
 
