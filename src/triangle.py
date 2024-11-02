@@ -49,11 +49,11 @@ class Shader:
         return True
 
     def link(self):
-        glLinkProgram(self.handle)
-        status = ctypes.c_uint(GL_UNSIGNED_INT)
-        glGetProgramiv(self.handle, GL_LINK_STATUS, status)
+        gl.glLinkProgram(self.handle)
+        status = ctypes.c_uint(gl.GL_UNSIGNED_INT)
+        gl.glGetProgramiv(self.handle, gl.GL_LINK_STATUS, status)
         if not status:
-            print(glGetProgramInfoLog(self.handle).decode("utf-8"), file=sys.stderr)
+            print(gl.glGetProgramInfoLog(self.handle).decode("utf-8"), file=sys.stderr)
             return False
         return True
 
