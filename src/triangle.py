@@ -10,7 +10,7 @@ import OpenGL.GL as gl
 import glfw
 
 class Shader:
-    def __init__(self):
+    def __init__(self) -> None:
         self.handle = glCreateProgram()
 
     def attach_shader(self, shader_file: Path, type: gl.constant.IntConstant) -> bool:
@@ -57,10 +57,10 @@ class Shader:
             return False
         return True
 
-    def use(self):
+    def use(self) -> None:
         glUseProgram(self.handle)
 
-    def unuse(self):
+    def unuse(self) -> None:
         glUseProgram(0)
 
 
